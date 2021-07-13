@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "exif-test",
+  "appId": "exif.test",
+  "appName": "exif.test",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

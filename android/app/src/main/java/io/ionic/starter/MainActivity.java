@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package exif.test;
 
 import android.os.Bundle;
 
