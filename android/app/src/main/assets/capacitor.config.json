@@ -1,6 +1,6 @@
 {
   "appId": "exif.test",
-  "appName": "exif.test",
+  "appName": "exiftest",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",

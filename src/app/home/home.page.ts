@@ -35,11 +35,13 @@ export class HomePage {
     console.log('take');
     const image = await Camera.getPhoto({
       quality: 90,
-      allowEditing: true,
+      allowEditing: false,
       resultType: CameraResultType.Uri
     });
+    
     console.log('exif in image', this.toString(image.exif));
 
+    return;
     fetch(image.webPath).then((resp) => resp.arrayBuffer()).then(async (ab) => {
       console.log(ab);
 
