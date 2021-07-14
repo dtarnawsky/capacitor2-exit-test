@@ -3,7 +3,7 @@ import exifr from 'exifr';
 
 import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
 
-const { Camera } = Plugins;
+const { Camera, Geolocation } = Plugins;
 
 const options = {
   ifd1: false,
@@ -33,6 +33,8 @@ export class HomePage {
 
   async takePicture() {
     console.log('take');
+    const coordinates = await Geolocation.getCurrentPosition();
+    
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
@@ -40,9 +42,10 @@ export class HomePage {
       resultType: CameraResultType.Base64 //.Uri
     });
     
+    console.log('Location', coordinates);
+
     console.log('exif in image', this.toString(image.exif));
 
-    return;
     fetch(image.webPath).then((resp) => resp.arrayBuffer()).then(async (ab) => {
       console.log(ab);
 
