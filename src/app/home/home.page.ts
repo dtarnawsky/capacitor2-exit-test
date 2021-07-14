@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import exifr from 'exifr';
 
-import { Plugins, CameraResultType } from '@capacitor/core';
+import { Plugins, CameraResultType, CameraSource } from '@capacitor/core';
 
 const { Camera } = Plugins;
 
@@ -36,12 +36,32 @@ export class HomePage {
     const image = await Camera.getPhoto({
       quality: 90,
       allowEditing: false,
-      resultType: CameraResultType.Uri
+      source: CameraSource.Camera,
+      resultType: CameraResultType.Base64 //.Uri
     });
     
     console.log('exif in image', this.toString(image.exif));
 
     return;
+    fetch(image.webPath).then((resp) => resp.arrayBuffer()).then(async (ab) => {
+      console.log(ab);
+
+      const exif = await exifr.parse(ab, options);
+      console.log('exif in file', this.toString(exif)); 
+    });
+  }
+
+  async selectPicture() {
+    console.log('select');
+    const image = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      source: CameraSource.Photos,
+      resultType: CameraResultType.Uri
+    });
+
+    console.log('exif in image', this.toString(image.exif));   
+    
     fetch(image.webPath).then((resp) => resp.arrayBuffer()).then(async (ab) => {
       console.log(ab);
 
