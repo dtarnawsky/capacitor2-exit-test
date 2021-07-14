@@ -9,7 +9,7 @@ const options = {
   ifd1: false,
   exif: true,
   interop: false,
-  gps: false,
+  gps: true,
 };
 @Component({
   selector: 'app-home',
@@ -18,16 +18,9 @@ const options = {
 })
 export class HomePage {
 
+  exifText: string;
+
   constructor() {
-
-
-    fetch('/assets/test-image.jpg').then((resp) => resp.arrayBuffer()).then(async (ab) => {
-      console.log(ab);
-
-      const exif = await exifr.parse(ab, options);
-      console.log(exif);
-    });
-
   }
 
 
@@ -45,6 +38,7 @@ export class HomePage {
     console.log('Location', coordinates);
 
     console.log('exif in image', this.toString(image.exif));
+    this.exifText = this.toString(coordinates) + " " + this.toString(image.exif);
 
     fetch(image.webPath).then((resp) => resp.arrayBuffer()).then(async (ab) => {
       console.log(ab);
@@ -70,6 +64,7 @@ export class HomePage {
 
       const exif = await exifr.parse(ab, options);
       console.log('exif in file', this.toString(exif)); 
+      this.exifText = this.toString(exif);
     });
   }
 
