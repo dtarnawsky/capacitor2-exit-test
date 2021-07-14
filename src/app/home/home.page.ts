@@ -32,7 +32,7 @@ export class HomePage {
       quality: 90,
       allowEditing: false,
       source: CameraSource.Camera,
-      resultType: CameraResultType.Base64 //.Uri
+      resultType: CameraResultType.Uri
     });
     
     console.log('Location', coordinates);
